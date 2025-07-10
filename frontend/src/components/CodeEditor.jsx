@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import ProgressTracker from './ProgressTracker';
+import { getApiEndpoint, API_ENDPOINTS } from '../config/api';
 
 const CodeEditor = ({ onAnalysisComplete }) => {
   const { user, token } = useContext(AuthContext);
@@ -60,7 +61,7 @@ const CodeEditor = ({ onAnalysisComplete }) => {
 
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:3000/api/analyze', {
+      const response = await fetch(getApiEndpoint(API_ENDPOINTS.ANALYZE_CODE), {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -99,7 +100,7 @@ const CodeEditor = ({ onAnalysisComplete }) => {
 
   const saveAnalysis = async (analysisData) => {
     try {
-      await fetch('http://localhost:3000/api/reviews', {
+      await fetch(getApiEndpoint('/api/reviews'), {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

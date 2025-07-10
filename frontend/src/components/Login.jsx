@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { getApiEndpoint, API_ENDPOINTS } from '../config/api';
 
 const Login = ({ onLogin }) => {
   const { login } = useContext(AuthContext);
@@ -11,7 +12,7 @@ const Login = ({ onLogin }) => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:3000/api/demo-login', {
+      const response = await fetch(getApiEndpoint(API_ENDPOINTS.DEMO_LOGIN), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

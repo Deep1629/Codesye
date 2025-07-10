@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { getApiEndpoint, API_ENDPOINTS } from '../config/api';
 
 const ProgressTracker = () => {
   const { user, token } = useContext(AuthContext);
@@ -21,7 +22,7 @@ const ProgressTracker = () => {
 
   const fetchProgress = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/progress', {
+      const response = await fetch(getApiEndpoint(API_ENDPOINTS.GET_PROGRESS), {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
